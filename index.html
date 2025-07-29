@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STR - Matériel professionnel livré en temps réel</title>
+    <style>
+        /* CSS Reset et Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --rouge: #D32F2F;
+            --gris: #616161;
+            --blanc: #FFFFFF;
+            --gris-clair: #f5f5f5;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; color: var(--rouge); }
+        h3 { font-size: 1.5rem; }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--rouge);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background-color: #b71c1c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--rouge);
+            color: var(--rouge);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--rouge);
+            color: white;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            animation: fadeIn 2s ease;
+        }
+        
+        /* Services */
+        .services {
+            background-color: var(--gris-clair);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 20px;
+        }
+        
+        .service-content h3 {
+            color: var(--rouge);
+        }
+        
+        /* Pourquoi nous */
+        .why-us {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .why-us-content ul {
+            list-style: none;
+        }
+        
+        .why-us-content li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .why-us-content li:before {
+            content: "✓";
+            color: var(--rouge);
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        .why-us-img img {
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Process */
+        .process {
+            background-color: var(--gris-clair);
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--rouge);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .step:not(:last-child):after {
+            content: "";
+            position: absolute;
+            top: 30px;
+            left: calc(50% + 30px);
+            width: calc(100% - 60px);
+            height: 2px;
+            background-color: var(--gris);
+            opacity: 0.3;
+        }
+        
+        /* Témoignages */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .testimonial:before {
+            content: """;
+            font-size: 5rem;
+            color: rgba(211, 47, 47, 0.1);
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--gris);
+        }
+        
+        /* CTA */
+        .cta {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .cta h2 {
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        /* FAQ */
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background-color: var(--gris-clair);
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .contact-info {
+            margin-bottom: 20px;
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--rouge);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--rouge);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .why-us {
+                grid-template-columns: 1fr;
+            }
+            
+            .why-us-img {
+                order: -1;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .step {
+                margin-bottom: 40px;
+            }
+            
+            .step:not(:last-child):after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête / Hero section -->
+    <header>
+        <div class="hero-content">
+            <h1>🎯 Vos équipements professionnels, livrés en temps réel.</h1>
+            <p>Outillage, pièces, équipements de sécurité… Reçus rapidement où que vous soyez.</p>
+            <a href="#contact" class="btn">Commander maintenant</a>
+            
+            <div class="badges">
+                <div class="badge">Disponible 24h/24</div>
+                <div class="badge">Livraison Express</div>
+                <div class="badge">Satisfaction garantie</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Nos Services -->
+    <section class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>🔧 Tout le matériel dont vous avez besoin, en un clic.</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a7b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Outillage professionnel">
+                    </div>
+                    <div class="service-content">
+                        <h3>Matériels & Outillages</h3>
+                        <p>Marteaux, meuleuses, perceuses, niveaux laser… pour tous les pros du BTP et de l'industrie.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1585059895524-72359e06133a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pièces détachées">
+                    </div>
+                    <div class="service-content">
+                        <h3>Pièces échangeables</h3>
+                        <p>Remplacement rapide de pièces pour machines, engins ou véhicules.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1583947581924-f6392a243b9e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Équipements de protection">
+                    </div>
+                    <div class="service-content">
+                        <h3>Équipements de sécurité (EPI)</h3>
+                        <p>Casques, gilets, gants, bottes, lunettes... pour bosser en toute sécurité.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bureau équipé">
+                    </div>
+                    <div class="service-content">
+                        <h3>Mobilier, informatique & électronique</h3>
+                        <p>Bureaux, imprimantes, onduleurs, chaises de direction.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pourquoi nous choisir -->
+    <section class="why-us-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>❤️ Un service à la hauteur de vos exigences.</h2>
+            </div>
+            
+            <div class="why-us">
+                <div class="why-us-content">
+                    <ul>
+                        <li>
+                            <h3>Expertise & expérience dans le domaine</h3>
+                            <p>Plus de 10 ans d'expérience dans la fourniture de matériel professionnel.</p>
+                        </li>
+                        <li>
+                            <h3>Livraison rapide et service personnalisé</h3>
+                            <p>Nous adaptons nos services à vos besoins spécifiques pour une satisfaction optimale.</p>
+                        </li>
+                        <li>
+                            <h3>Qualité garantie & grande disponibilité produit</h3>
+                            <p>Tous nos produits sont de qualité professionnelle et disponibles immédiatement.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="why-us-img">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Équipe professionnelle">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fonctionnement -->
+    <section class="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>🚀 Un service ultra-rapide, simple et efficace.</h2>
+            </div>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Commande</h3>
+                    <p>Faites votre demande par téléphone, WhatsApp ou formulaire</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Traitement</h3>
+                    <p>Traitement immédiat de la commande par notre équipe</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Livraison</h3>
+                    <p>Livraison ou retrait express → en moins de 2h dans Bamako</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Témoignages -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>⭐ Ce que nos clients disent de nous</h2>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>J'ai reçu mes outils sur chantier le jour même, impressionnant !</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Moussa">
+                        <div class="author-info">
+                            <h4>Moussa</h4>
+                            <p>Chef de chantier, Kalaban</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>Rapide et pro, mon entreprise dépend de leur fiabilité.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Mariam">
+                        <div class="author-info">
+                            <h4>Mariam</h4>
+                            <p>Responsable logistique</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>🔥 Besoin de matériel en urgence ? On s'en occupe immédiatement.</h2>
+            
+            <div class="cta-buttons">
+                <a href="#contact" class="btn">Commander maintenant</a>
+                <a href="#contact" class="btn btn-outline">Demander un devis rapide</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>❓ Questions Fréquentes</h2>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Quels produits sont livrables en temps réel ?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Tous les produits présentés sur notre site sont disponibles pour une livraison express. Cela inclut l'outillage, les pièces détachées, les EPI et le matériel de bureau.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Jusqu'où livrez-vous ?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous couvrons toute la région de Bamako et ses environs. Pour les commandes en dehors de cette zone, contactez-nous pour étudier la faisabilité.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Puis-je commander le week-end ?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, notre service est disponible 24h/24 et 7j/7, y compris les week-ends et jours fériés.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment payer ?</h3>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous acceptons les paiements en espèces à la livraison, par virement bancaire ou mobile money. Pour les entreprises, des factures avec paiement différé sont possibles sous conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Contactez-nous</h3>
+                    <div class="contact-info">
+                        <p><i>📍</i> Bamako, Quartier Niaréla</p>
+                        <p><i>📞</i> 76 91 85 45</p>
+                        <p><i>✉️</i> simbodiawara@gmail.com</p>
+                        <p><i>✉️</i> contact@str.com</p>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#"><i>f</i></a>
+                        <a href="#"><i>in</i></a>
+                        <a href="#"><i>t</i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Horaires</h3>
+                    <ul>
+                        <li><strong>Lundi-Vendredi:</strong> 24h/24</li>
+                        <li><strong>Samedi-Dimanche:</strong> 24h/24</li>
+                        <li>Service d'urgence disponible</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#services">Nos services</a></li>
+                        <li><a href="#process">Comment ça marche</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Abonnez-vous pour recevoir nos offres spéciales</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit" class="btn">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 STR - Vente & livraison express de matériel professionnel. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/22376918545" class="whatsapp-float" target="_blank">
+        <i>💬</i>
+    </a>
+
+    <script>
+        // JavaScript pour les fonctionnalités interactives
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Accordéon
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentNode;
+                    item.classList.toggle('active');
+                    
+                    // Changement du signe +/-
+                    const icon = question.querySelector('.toggle-icon');
+                    if (item.classList.contains('active')) {
+                        icon.textContent = '-';
+                    } else {
+                        icon.textContent = '+';
+                    }
+                });
+            });
+            
+            // Animation au défilement
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.service-card, .step, .testimonial');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Initialiser les éléments avec une opacité 0 pour l'animation
+            document.querySelectorAll('.service-card, .step, .testimonial').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+            });
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Appeler une fois au chargement
+            
+            // Smooth scrolling pour les liens
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Simulation d'envoi de formulaire
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const emailInput = this.querySelector('input[type="email"]');
+                    alert(`Merci pour votre inscription avec l'email: ${emailInput.value}`);
+                    emailInput.value = '';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
